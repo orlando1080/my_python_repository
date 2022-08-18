@@ -6,12 +6,10 @@ play_again = True
 while play_again:
 
     print(f'Welcome to Hangman!')
-    word = list(getpass(prompt=f'To play, please enter a word (word will not be displayed): ').lower())
-
-    for l in word:
-        while not l.isalpha():
-            word = list(
-                getpass(prompt=f'Only enter letters, please enter a word (word will not be displayed): ').lower())
+    word = getpass(prompt=f'To play, please enter a word (word will not be displayed): ').lower()
+    while not word.isalpha():
+        word = getpass(prompt=f'Only enter letters, please enter a word (word will not be displayed): ').lower()
+    word = list(word)
     hangman = ['_' for letter in word]
 
     print(hangman)
