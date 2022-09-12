@@ -1,16 +1,23 @@
 #! python3
 from getpass import getpass
 
+def convert_word(word):
+    """Converts user word to hangman spaces."""
+    return ['_' for letter in word]
+
 play_again = True
 
 while play_again:
 
     print(f'Welcome to Hangman!')
+
     word = getpass(prompt=f'To play, please enter a word (word will not be displayed): ').lower()
+
     while not word.isalpha():
         word = getpass(prompt=f'Only enter letters, please enter a word (word will not be displayed): ').lower()
     word = list(word)
-    hangman = ['_' for letter in word]
+
+    hangman = convert_word(word)
 
     print(hangman)
 

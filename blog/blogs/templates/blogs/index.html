@@ -1,0 +1,26 @@
+<p>Blogs</p>
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    Hello, {{ user.username }}
+    <a href="{% url 'users:logout' %}">Logout</a>
+{% else %}
+    <a href="{% url 'users:register' %}">Register</a> -
+    <a href="{% url 'users:login' %}">Log in</a>
+{% endif %}
+
+<ul>
+    {% for blog in blogs %}
+<li>{{ blog }}</li>
+        <p><a href="{% url 'blogs:edit_blog_post' blog.id %}">Edit blog post</a></p>
+        <p></p>
+    {% empty %}
+      <li>No Blogs have benn added yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'blogs:new_blog' %}">Add new blog</a>
+
+
+{% endblock content %}
