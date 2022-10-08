@@ -3,8 +3,10 @@
 import json
 import os
 
+
 class MadLibs:
     path = '.\\templates'
+
     def __init__(self, word_description, template):
         self.template = template
         self.word_description = word_description
@@ -34,6 +36,7 @@ class MadLibs:
 
     def display_story(self):
         print(story)
+
 
 def select_template():
     print('Select a Mad Lib from the following list: ')
