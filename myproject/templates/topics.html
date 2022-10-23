@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block title %}
     {{ board.name }} - {{ block.super }}
 {% endblock %}
@@ -18,7 +20,7 @@
         <a href="{% url 'boards:new_topic' board.id %}" class="btn btn-primary">New topic</a>
     </article>
 
-    <table class="table">
+    <table class="table table-striped mb-4">
         <thead class="thead-inverse">
         <tr>
             <th>Topic</th>
@@ -29,17 +31,32 @@
         </tr>
         </thead>
         <tbody>
-            {% for topic in board.topics.all %}
+            {% for topic in topics %}
+                {% url 'boards:topic_posts' board.id topic.id as topic_url %}
                 <tr>
-                    <td>{{ topic.subject }}</td>
+                    <td>
+                        <p class="mb-0">
+                            <a href="{{ topic_url }}">{{ topic.subject }}</a>
+                        </p>
+                        <small class="text-muted">
+                            Pages:
+                            {% for i in topic.get_page_range %}
+                                <a href="{{ topic_url }}?page={{ i }}">{{ i }}</a>
+                            {% endfor %}
+                            {% if topic.has_many_pages %}
+                                <a href="{{ topic_url }}?page={{ topic.get_page_count }}">Last Page</a>
+                            {% endif %}
+                        </small>
+                    </td>
                     <td>{{ topic.start.username }}</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>{{ topic.last_updated }}</td>
+                    <td>{{ topic.replies }}</td>
+                    <td>{{ topic.views }}</td>
+                    <td>{{ topic.last_updated|naturaltime }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% include 'includes/pagination.html' %}
 {% endblock %}
 
 

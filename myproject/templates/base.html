@@ -28,8 +28,8 @@
                                        {{ user.username }}
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-                                        <li><a class="dropdown-item" href="#">My account</a></li>
-                                        <li><a class="dropdown-item" href="#">Change password</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'my_account' %}">My account</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'password_change' %}">Change password</a></li>
                                         <div class="dropdown-divider"></div>
                                         <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
                                     </ul>
@@ -56,6 +56,7 @@
         {% endblock body %}
         <script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        {% block javascript %}{% endblock %}
     </body>
 </html>
 
